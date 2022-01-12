@@ -27,9 +27,9 @@ export default function ProductSimple() {
       })
       .then(response => {
         console.log(response);
-        const sid = response.data.sid
-        console.log('sid: ' + sid);
-        document.cookie = sid;
+        const cookie = response.headers['set-cookie']
+        console.log('cookie ' + cookie);
+        document.cookie = cookie;
 
         axios.put('https://api-fund-tracker.herokuapp.com/trust', {
           "role": "trust",
