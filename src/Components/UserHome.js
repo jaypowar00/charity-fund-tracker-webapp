@@ -20,6 +20,34 @@ export default function ProductSimple() {
   const [charities, setCharities] = useState([]);
 
   useEffect(() => {
+
+    axios.post('https://api-fund-tracker.herokuapp.com/auth/login', {
+        username: "Rambo",
+        password: "1234",
+      })
+      .then(response => {
+        console.log(response);
+        const sid = response.data.sid
+        console.log('sid: ' + sid);
+        document.cookie = sid;
+
+        axios.put('https://api-fund-tracker.herokuapp.com/trust', {
+          "role": "trust",
+          "status": "pending",
+          "username": "Rambo",
+          "password": "1234",
+          "email": "adi@adix.com",
+          "description": "All new trust",
+          "walletAddress": "NOICE"
+        }, {withCredentials: true}).then(res => {
+          console.log(res);
+        })
+      })
+      .catch(err => {
+        console.log(err);
+        window.alert(err.message);
+      });
+
     axios.get('https://fundtracking.herokuapp.com/charity')
       .then((response) => {
         if (response.data.status) {

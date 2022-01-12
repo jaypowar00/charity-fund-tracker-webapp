@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Flex,
   Heading,
@@ -30,7 +30,7 @@ const Login = () => {
   const loginUser = e => {
     e.preventDefault();
     axios
-      .post('https://fundtracking.herokuapp.com/doners/login', {
+      .post('https://api-fund-tracker.herokuapp.com/auth/login', {
         email: email,
         password: password,
       })
